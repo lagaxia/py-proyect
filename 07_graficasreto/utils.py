@@ -13,6 +13,14 @@ def get_population(country_dict):
   values = population_dict.values()
   return labels, values
 
+def get_population_ratio(datos):
+  continent = input('What continent are you interested in? Write your answer: ')
+  continent = continent.title()
+  datos = list(filter(lambda item: item['Continent'] == continent, datos))
+  print(continent)
+  paises = [item['Country'] for item in datos]
+  ratios = [float(item['World Population Percentage']) for item in datos]
+  return paises, ratios
 
 def population_by_country(data, country):
   result = list(filter(lambda item: item['Country'] == country, data))
