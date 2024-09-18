@@ -2,7 +2,7 @@ import os
 import utils
 import read_csv
 import charts
-
+import pandas as pd
 
 '''En esta función se usa list comprehensions. Se está recorriendo a DATOS, que es
 una lista compuesta de diccionarios, y cada uno de estos se denomina ITEM. Luego,
@@ -14,9 +14,8 @@ def get_world_percentages(data):
     per = percentages_dict.values()
 
     return names, per'''
-    
-def run():
-    
+#adentro de la funcion    
+'''
 # Verificar que el archivo exista antes de leerlo
 
     data = read_csv.read_csv('poblacion.csv')
@@ -26,7 +25,16 @@ def run():
     percentages = list(map(lambda x: x['World Population Percentage'], data))
     charts.generate_pie_chart(countries, percentages)
     
+'''   
+def run():
+    df = pd.read_csv('poblacion.csv')
+    df = df[df['Continent'] == 'Africa']
     
+    countries = df['Country'].values
+    percentages = df['World Population Percentage'].values
+    charts.generate_pie_chart(countries, percentages)
+    
+    data = read_csv.read_csv('poblacion.csv')
     country = input('Type Country => ')
 
     result = utils.population_by_country(data, country)
